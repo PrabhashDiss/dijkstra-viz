@@ -650,9 +650,12 @@
                 const headerRow = distanceTable.querySelector('thead tr');
                 const nodeCols = headerRow.querySelectorAll('th');
                 
-                // Clear existing columns
+                // Safely remove existing columns
                 while (nodeCols.length > 2) {
-                    headerRow.removeChild(nodeCols[nodeCols.length - 1]);
+                    const lastCol = nodeCols[nodeCols.length - 1];
+                    if (headerRow.contains(lastCol)) {
+                        headerRow.removeChild(lastCol);
+                    }
                 }
                 
                 // Add node columns
